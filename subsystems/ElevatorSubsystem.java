@@ -45,7 +45,9 @@ public class ElevatorSubsystem extends SubsystemBase {
     public void periodic() {
       if (gyroSubsystem.getAngle()==Constants.certainAngle) {
         SmartDashboard.putString("Certain Angle: ", "True");
-        new RaiseElevatorCommand().schedule();
+        if (!isRaised) {
+            new RaiseElevatorCommand(this).schedule();
+        }
       } else SmartDashboard.putString("Certain Angle: ", "False");
     }
 }
