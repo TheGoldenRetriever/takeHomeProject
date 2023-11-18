@@ -3,12 +3,16 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.commands.*;
 
 public class ElevatorSubsystem extends SubsystemBase {
     private final CANSparkMax elevatorMotor1 = new CANSparkMax(4, MotorType.kBrushless);
     private final CANSparkMax elevatorMotor2 = new CANSparkMax(5, MotorType.kBrushless);
+    private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
 
     private boolean isRaised = false;
 
@@ -39,6 +43,9 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
     @Override
     public void periodic() {
-      
+      if (gyroSubsystem.getAngle()==Constants.certainAngle) {
+        SmartDashboard.putString("Certain Angle: ", "True");
+        new RaiseElevatorCommand().schedule();
+      } else SmartDashboard.putString("Certain Angle: ", "False");
     }
 }

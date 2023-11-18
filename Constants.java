@@ -21,4 +21,5 @@ public final class Constants {
   public static final double arcadeRotationSpeed = 0.5;
   public static final int autonomousStraightLine = 10;
   public static final double angleToTurnFor = 90.0;
+  public static final double certainAngle = 115.0;
 }
